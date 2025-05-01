@@ -19,4 +19,14 @@ def load_progress():
         return {"high_score": 0, "max_level": 1}
 
 def save_progress(high_score, max_level):
-    # … your existing save logic …
+    """Save the player’s high score & level, then log the event."""
+    data = {"high_score": high_score, "max_level": max_level}
+    # write out JSON
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f)
+    # log to your game.log via the logging module
+    logging.info(f"Progress saved: {data}")
+
+def log_event(event):
+    """Log an arbitrary event message."""
+    logging.info(event)
